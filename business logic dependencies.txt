@@ -1,0 +1,38 @@
+enter the home page ===>
+listFixedDeposits()
+	fixedDepositService.getFixedDeposits();
+
+	===> fixedDepositDao.getFixedDeposits();
+	===> return List<FixedDepositDetails> fdList
+
+Click create at the bottom of createForm page ===> 
+openFixedDeposit()
+	fixedDepositService.saveFixedDeposit(fixedDepositDetails);
+
+	===> fixedDepositDao.saveFixedDeposit(fixedDepositDetails);
+	===> id = random.nextInt();
+		 fixedDepositDetails.setId(id);
+		 fdList.add(fixedDepositDetails);
+
+View one entry detials ===>
+viewFixedDepositDetails()
+	fixedDepositDetails = fixedDepositService.getFixedDeposit(id)
+
+	===> fixedDepositDao.getFixedDeposit(id)
+	===> for each fixedDepositDetails in fdList
+			if fixedDepositDetails.id == id
+				return fixedDepositDetails;
+
+Save change of one entry ===> 
+editFixedDeposit()
+	fixedDepositService.editFixedDeposit(fixedDepositDetails);
+
+	===> fixedDepositDao.editFixedDeposit(fixedDepositDetails);
+	===> for each fixedDepositDetails in fdList
+			if fixedDepositDetails.id == id
+				fdList.remove(fixedDepositDetails);
+				break;
+		fdList.add(fixedDepositDetails);
+
+
+
