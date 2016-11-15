@@ -1,0 +1,48 @@
+View: "fixedDepositList" & 
+modelData: "fdList" -> fixedDepositService.getFixedDeposits()
+
+===> 
+
+<c:forEach collection ="${fdList}" entry_var = "fixedDeposit">
+	<td><c:out value="${fixedDeposit.id}" /></td>
+	<td><c:out value="${fixedDeposit.depositAmount}" /></td>
+	<td><c:out value="${fixedDeposit.tenure}" /></td>
+	<td><c:out value="${fixedDeposit.email}" /></td>
+</c:forEach>
+
+
+View: "createFixedDepositForm" &
+modelData:  "error.depositAmout", "error.tenure", "error.email", "fixedDepositDetails"
+
+===>
+
+<tr>
+	<td>
+		<input value="${fixedDepositDetails.depositAmount}"/>
+		<c:out value="requestScope['error.depositAmount']" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<input value="${fixedDepositDetails.tenure}"/>
+		<c:out value="requestScope['error.tenure']"/>
+	</td>
+</tr>
+...(fixedDepositDetails.tenure, error.tenure)...
+
+
+View: "editFixedDepositForm" &
+modelData: "fixedDepositDetails"
+
+===>
+
+<tr>
+	<td>
+		<input value="${fixedDepositDetails.id}"/>
+	</td>
+</tr>
+...(fixedDepositDetails.depositAmount)...
+...(fixedDepositDetails.tenure)...
+...(fixedDepositDetails.email)...
+
+

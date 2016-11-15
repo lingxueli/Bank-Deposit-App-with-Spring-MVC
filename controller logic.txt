@@ -8,7 +8,7 @@ listFixedDeposits()
 Click createForm at the bottom of the page ===>
 /fixedDeposit?fdAction=createFDForm
 showOpenFixedDepositForm()
-	ModelMap: ""
+	ModelMap: fixedDepositDetails (Empty)
 	return View: "createFixedDepositForm"
 
 
@@ -56,7 +56,7 @@ editFixedDeposit(Map<String, String> params)
 
 	if there are validation errors
 	Map:  "error.depositAmout", "error.tenure", "error.email", "fixedDepositDetails"
-	return View: edit page of current entry
+	return View: editFixedDepositForm
 
 	if there is no validation error
 	fixedDepositService.editFixedDeposit(fixedDepositDetails);
