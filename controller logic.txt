@@ -1,0 +1,68 @@
+homepage ===>
+/fixedDeposit/list
+listFixedDeposits()
+	Map: "fdList" -> fixedDepositService.getFixedDeposits()
+	return View: "fixedDepositList"
+
+
+Click createForm at the bottom of the page ===>
+/fixedDeposit?fdAction=createFDForm
+showOpenFixedDepositForm()
+	ModelMap: ""
+	return View: "createFixedDepositForm"
+
+
+Click create at the bottom of createForm page ===> 
+/fixedDeposit?fdAction=create
+openFixedDeposit(Map<String, String> params)
+
+	String depositAmount = params.get("depositAmount");
+	String tenure = params.get("tenure");
+	String email = params.get("email");
+
+	fixedDepositDetails.setDepositAmount(depositAmount);
+	fixedDepositDetails.setEmail(email);
+	fixedDepositDetails.setTenure(tenure);
+
+	if there are validation errors
+	Map:  "error.depositAmout", "error.tenure", "error.email", "fixedDepositDetails"
+	return View: "createFixedDepositForm"
+
+	if there is no validation error
+	fixedDepositService.saveFixedDeposit(fixedDepositDetails);
+	return View: redirect to homepage
+
+
+Click view at the right side of one entry ===>
+/fixedDeposit?fdAction=view
+viewFixedDepositDetails(HttpServletRequest request)
+	id = request.getParameter("fixedDepositId")
+	fixedDepositDetails = fixedDepositService.getFixedDeposit(id)
+
+	ModelMap: fixedDepositDetails
+	return View: editFixedDepositForm
+
+
+Click submit at the bottom of edit page of one entry ===>
+/fixedDeposit?fdAction=edit
+editFixedDeposit(Map<String, String> params)
+
+	String depositAmount = params.get("depositAmount").get(0);
+	String tenure = params.get("tenure").get(0);
+	String email = params.get("email").get(0);
+	String id = params.get("id").get(0);
+
+	Map<String, Object> modelData = new HashMap<String, Object>();
+
+	if there are validation errors
+	Map:  "error.depositAmout", "error.tenure", "error.email", "fixedDepositDetails"
+	return View: edit page of current entry
+
+	if there is no validation error
+	fixedDepositService.editFixedDeposit(fixedDepositDetails);
+	return View: redirect to homepage
+
+Click return at the bottom of edit page of one entry ===>
+/fixedDeposit?fdAction=close
+closeFixedDeposit(int fdId)
+	return View: redirect to homepage
